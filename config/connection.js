@@ -1,27 +1,21 @@
-const mysql = require("mysql");
+// *********************************************************************************
+// CONNECTION.JS - THIS FILE INITIATES THE CONNECTION TO MYSQL
+// *********************************************************************************
 
-/**
- * function to establish connection with the SQL database
- */
-const initDBConnection = () => {
-  if (process.env.JAWSDB_URL) {
-    connection = mysql.createConnection(process.env.JAWSDB_URL);
-    return connection;
-  } else {
-    const connection = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "test",
-      database: "burgers_db"
-    });
+// Dependencies
+var Sequelize = require('sequelize');
 
-    connection.connect(function(err) {
-      if (err) throw err;
-      console.log("SQL DB Connected!");
-    });
-
-    return connection;
+// Creates mySQL connection using Sequelize, the empty string in the third argument spot is our password.
+var sequelize = new Sequelize('sequelize_burger', 'root', 'test', {
+  host: 'localhost',
+  port: 3306,
+  dialect: 'mysql',
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
   }
-};
+});
 
-module.exports = initDBConnection;
+// Exports the connection for other files to use
+module.exports = sequelize;

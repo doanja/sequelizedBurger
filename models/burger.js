@@ -1,44 +1,30 @@
-const orm = require("../config/orm");
+// Dependencies
+// =============================================================
 
-/**
- * calls selectAll passing in a callback function
- * @param {function} func the callback function
- * @return void
- */
-const selectAll = func => {
-  orm.selectAll("burgers", res => {
-    func(res);
-  });
-};
+// This may be confusing but here Sequelize (capital) references the standard library
+var Sequelize = require('sequelize');
+// sequelize (lowercase) references our connection to the DB.
+var sequelize = require('../config/connection.js');
 
-/**
- * calls insertOne passing in a callback function
- * @param {string} columns the SQL column names
- * @param {array} values the values to be inserted
- * @param {function} func the callback function
- * @return void
- */
-const insertOne = (columns, values, func) => {
-  orm.insertOne("burgers", columns, values, res => {
-    func(res);
-  });
-};
+// Creates a "Burger" model that matches up with DB
+var Burger = sequelize.define('burger', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  burger_name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  devoured: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
+});
 
-/**
- * call updateOne passing in a callback function
- * @param {object} colValPairs the object containg key (column name) and value (value)
- * @param {string} condition the condition
- * @param {function} func the callback function
- * @return void
- */
-const updateOne = (colValPairs, condition, func) => {
-  orm.updateOne("burgers", colValPairs, condition, res => {
-    func(res);
-  });
-};
+// Syncs with DB
+Burger.sync();
 
-module.exports = {
-  selectAll: selectAll,
-  insertOne: insertOne,
-  updateOne: updateOne
-};
+// Makes the Burger Model available for other files (will also create a table)
+module.exports = Burger;
