@@ -1,6 +1,6 @@
-# Burger
+# Sequelized Burger
 
-Burger is a application built with express, express-handlebars, and MySQL. This app follows the MVC design pattern; using Node and MySQL to query and route data in the app, and Handlebars to generate the HTML.
+Sequelized burger is a application built with express, express-handlebars, and Sequelized. This app follows the MVC design pattern; using Node and MySQL to query and route data in the app, and Handlebars to generate the HTML.
 
 ## Usage
 
@@ -26,6 +26,7 @@ View the live demo hosted on heroku [here](https://doanja-burger.herokuapp.com/)
 - jQuery
 - axios
 - bootstrap
+- Sequelized
 
 ## License
 
