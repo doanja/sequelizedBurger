@@ -1,8 +1,9 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const db = require('./models');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static('public'));
@@ -15,7 +16,10 @@ app.use(express.json());
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-// routes
+// Routes
 app.use('/', require('./controllers/burgers_controller'));
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+// Syncing our sequelize models and then starting our Express app
+db.sequelize.sync({ force: true }).then(() => {
+  app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+});

@@ -1,41 +1,69 @@
 const express = require('express');
-// const burgers = require('../config/orm');
-const Burger = require('../models/burger');
 const router = express.Router();
+var db = require('../models');
 
 // Get all Burgers
 router.get('/', function(req, res) {
-  Burger.findAll({
+  db.Burger.findAll({
     order: [['burger_name', 'ASC']]
-  }).then(function(results) {
-    res.render('index', {
-      title: 'Burgers Page',
-      data: results
+  })
+    .then(data => {
+      res.render('index', {
+        title: 'Burgers Page',
+        data: data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(400).json({ error: err });
     });
-  });
 });
 
 // Add a Burger
 router.post('/api/burgers', function(req, res) {
-  Burger.create({
+  db.Burger.create({
     burger_name: req.body.burger_name
-  }).then(function(results) {
-    res.redirect('/');
-  });
+  })
+    .then(data => {
+      res.redirect('/');
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(400).json({ error: err });
+    });
 });
 
-// Add a Burger
+// Update a Burger
 router.put('/api/burgers/:id', (req, res) => {
-  Burger.update(
+  db.Burger.update(
     {
       devoured: true
     },
     {
       where: { id: req.params.id }
     }
-  ).then(function(rowsUpdated) {
-    res.json(rowsUpdated);
-  });
+  )
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(400).json({ error: err });
+    });
+});
+
+// Delete a Burger
+router.delete('/api/burgers/:id', (req, res) => {
+  db.Burger.destroy({
+    where: { id: req.params.id }
+  })
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(400).json({ error: err });
+    });
 });
 
 module.exports = router;
