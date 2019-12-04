@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "aj09p979c3fg7uo0",
-    "password": "myyy6d33htz9i6kj",
-    "database": "ljgixp6wr6r96g3p",
-    "host": "hcm4e9frmbwfez47.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "root",
+    "password": "test",
+    "database": "sequelize_burger",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": 0
   },
@@ -16,6 +16,7 @@
     "operatorsAliases": 0
   },
   "production": {
+    "use_env_variable": "DATABASE_URL",
     "username": "root",
     "password": null,
     "database": "database_production",
