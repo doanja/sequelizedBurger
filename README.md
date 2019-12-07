@@ -15,7 +15,7 @@ Sequelized burger is a application built with express, express-handlebars, and S
 
 ## Demo
 
-View the live demo hosted on heroku [here](https://doanja-burger.herokuapp.com/).
+View the live demo hosted on heroku [here](https://doanja-sequelized-burger.herokuapp.com/).
 
 ## Built With
 
@@ -30,4 +30,4 @@ View the live demo hosted on heroku [here](https://doanja-burger.herokuapp.com/)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/doanja/Recipe-Sluts/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/doanja/sequelizedBurger/blob/master/LICENSE) file for details
