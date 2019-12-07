@@ -1,8 +1,23 @@
 <h1 class="mb-3">{{title}}</h1>
 
+<div class="form-group form-row" id="customer-selection">
+    <div class="col-2">
+        <label for="inlineFormCustomSelect">Who's Eating?</label>
+    </div>
+    <div class="col-4">
+        <select class="custom-select" id="customer">
+            {{#each customers}}
+            <option value={{id}}>
+                {{customer_name}}
+            </option>
+            {{/each}}
+        </select>
+    </div>
+</div>
+
 <ul class="list-group">
     <div class="row">
-        {{#each data}}
+        {{#each burgers}}
         {{#if devoured}}
         <li class="list-group-item d-flex justify-content-between align-items-center col-6">
         </li>
@@ -11,10 +26,12 @@
             <button class="btn btn-danger delete-button" data="{{id}}">Delete</button>
         </li>
         {{else}}
+
         <li class="list-group-item d-flex justify-content-between align-items-center col-6">
             <p>{{burger_name}}</p>
-            <button class="btn btn-danger devour-button" id="{{id}}">Devour It!</button>
+            <button class="btn btn-outline-danger devour-button" type="button" id="{{id}}">Devour It</button>
         </li>
+
         <li class=" list-group-item d-flex justify-content-between align-items-center col-6" id="{{id}}">
             <p class="text-right"></p>
         </li>
@@ -23,12 +40,22 @@
     </div>
 </ul>
 
-{{!-- form --}}
+
+
+{{!-- form for burger --}}
 <form class="mt-3" action="/api/burgers" method="POST">
     <div class="form-group">
         <textarea class="form-control" id="input" name="burger_name" type="text" rows="3"></textarea>
     </div>
-    <button type="submit" id="submitButton" class="btn btn-primary mb-3">Submit</button>
+    <button type="submit" id="submitButton" class="btn btn-primary mb-3">Create Burger</button>
+</form>
+
+{{!-- form for customer--}}
+<form class="mt-3" action="/api/customer" method="POST">
+    <div class="form-group">
+        <textarea class="form-control" id="inputCustomer" name="customer_name" type="text" rows="3"></textarea>
+    </div>
+    <button type="submit" id="submitButtonCustomer" class="btn btn-danger mb-3">Create Customer</button>
 </form>
 
 {{!-- jQuery CDN --}}

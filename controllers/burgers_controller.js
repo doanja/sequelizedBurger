@@ -3,14 +3,22 @@ const router = express.Router();
 var db = require('../models');
 
 // Get all Burgers
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
   db.Burger.findAll({
     order: [['burger_name', 'ASC']]
   })
-    .then(data => {
-      res.render('index', {
-        title: 'Burgers Page',
-        data: data
+    .then(burgers => {
+      console.log('BURGERS++++++++++++', burgers);
+      db.Customer.findAll({
+        order: [['id', 'ASC']]
+      }).then(customers => {
+        console.log('CUSTOMERS---------------', customers);
+        console.log('BURGERS2-------------', burgers);
+        res.render('index', {
+          title: 'Burgers Page',
+          burgers,
+          customers
+        });
       });
     })
     .catch(err => {
@@ -20,7 +28,7 @@ router.get('/', function(req, res) {
 });
 
 // Add a Burger
-router.post('/api/burgers', function(req, res) {
+router.post('/api/burgers', (req, res) => {
   db.Burger.create({
     burger_name: req.body.burger_name
   })
@@ -34,10 +42,13 @@ router.post('/api/burgers', function(req, res) {
 });
 
 // Update a Burger
-router.put('/api/burgers/:id', (req, res) => {
+router.put('/api/burgers/:id/:customer_id', (req, res) => {
+  // console.log(req.params);
+
   db.Burger.update(
     {
-      devoured: true
+      devoured: true,
+      CustomerId: req.params.customer_id
     },
     {
       where: { id: req.params.id }

@@ -18,6 +18,7 @@ app.set('view engine', 'handlebars');
 
 // Routes
 app.use('/', require('./controllers/burgers_controller'));
+app.use('/', require('./controllers/customers_controller'));
 
 // Syncing our sequelize models and then starting our Express app
 db.sequelize.sync({ force: true }).then(() => {
