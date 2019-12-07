@@ -1,14 +1,42 @@
-$('#submitButton').click(() => {
-  if (!$('#input').val()) {
+$('#submit-burger-button').click(() => {
+  console.log('clicked');
+  if (!$('#burger-name-input').val()) {
     alert('You must enter a burger name!');
+  } else {
+    postBurger();
   }
 });
 
-$('#submitButtonCustomer').click(() => {
-  if (!$('#inputCustomer').val()) {
+// function to send a post request using axios to create a new burger
+const postBurger = () => {
+  // send put request to /api/customer
+  axios.post(`/api/burgers/`, { burger_name: $('#burger-name-input').val() }).then(res => {
+    location.reload();
+  }),
+    err => {
+      console.log(err);
+    };
+};
+
+$('#submit-customer-button').click(() => {
+  console.log('clicked');
+  if (!$('#customer-name-input').val()) {
     alert('You must enter a customer name!');
+  } else {
+    postCustomer();
   }
 });
+
+// function to send a post request using axios to create a new customer
+const postCustomer = () => {
+  // send put request to /api/customer
+  axios.post(`/api/customer/`, { customer_name: $('#customer-name-input').val() }).then(res => {
+    location.reload();
+  }),
+    err => {
+      console.log(err);
+    };
+};
 
 // click listener for devour buttons
 $('.devour-button').click(function() {
@@ -19,7 +47,7 @@ $('.devour-button').click(function() {
   clickDevour(id, customer_id);
 });
 
-// function to send a put request using axios
+// function to send a put request using axios to update burger
 const clickDevour = (id, customer_id) => {
   // send put request to /api/burgers/id
   axios.put(`/api/burgers/${id}/${customer_id}`).then(res => {

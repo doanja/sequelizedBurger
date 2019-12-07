@@ -1,3 +1,7 @@
 body {
-  background: url("../img/ep_naturalblack.png");
+  background: url('../img/ep_naturalblack.png');
+}
+
+img {
+  width: 200px;
 }
