@@ -5,15 +5,12 @@ var db = require('../models');
 // Get all Burgers
 router.get('/', (req, res) => {
   db.Burger.findAll({
-    order: [['burger_name', 'ASC']]
+    order: [['id', 'ASC']]
   })
     .then(burgers => {
-      console.log('BURGERS++++++++++++', burgers);
       db.Customer.findAll({
         order: [['id', 'ASC']]
       }).then(customers => {
-        console.log('CUSTOMERS---------------', customers);
-        console.log('BURGERS2-------------', burgers);
         res.render('index', {
           title: 'Burgers Page',
           burgers,
@@ -43,8 +40,6 @@ router.post('/api/burgers', (req, res) => {
 
 // Update a Burger
 router.put('/api/burgers/:id/:customer_id', (req, res) => {
-  // console.log(req.params);
-
   db.Burger.update(
     {
       devoured: true,

@@ -10,7 +10,6 @@
     </div>
 
     {{!-- form for customer--}}
-
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="enter customer name" id="customer-name-input">
         <div class="input-group-append">
@@ -38,16 +37,20 @@
 {{!-- burgers eaten --}}
 <ul class="list-group">
     <div class="row">
+        {{!-- for each burger --}}
         {{#each burgers}}
+
+        {{!-- if the burger is eaten --}}
         {{#if devoured}}
         <li class="list-group-item d-flex justify-content-between align-items-center col-6">
         </li>
         <li class=" list-group-item d-flex justify-content-between align-items-center col-6" id="{{id}}">
-            <p class="text-right">{{burger_name}}</p>
+            <p class="text-right">{{burger_name}} eaten by {{CustomerId}}</p>
             <button class="btn btn-danger delete-button" data="{{id}}">Delete</button>
         </li>
-        {{else}}
 
+        {{!-- if the burger is uneaten --}}
+        {{else}}
         <li class="list-group-item d-flex justify-content-between align-items-center col-6">
             <p>{{burger_name}}</p>
             <button class="btn btn-outline-danger devour-button" type="button" id="{{id}}">Devour It</button>

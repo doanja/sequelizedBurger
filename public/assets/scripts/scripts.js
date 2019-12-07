@@ -41,10 +41,14 @@ const postCustomer = () => {
 // click listener for devour buttons
 $('.devour-button').click(function() {
   const id = $(this).attr('id');
-  console.log('id :', id);
   const customer_id = $('#customer').val();
-  console.log('customer_id', customer_id);
-  clickDevour(id, customer_id);
+
+  // check to see if a customer is selected
+  if (customer_id === null) {
+    alert('Create and select a new customer to devour the burger!');
+  } else {
+    clickDevour(id, customer_id);
+  }
 });
 
 // function to send a put request using axios to update burger
