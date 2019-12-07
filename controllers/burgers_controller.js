@@ -5,12 +5,19 @@ var db = require('../models');
 // Get all Burgers
 router.get('/', (req, res) => {
   db.Burger.findAll({
-    order: [['id', 'ASC']]
+    order: [['id', 'ASC']],
+    include: [
+      {
+        model: db.Customer
+      }
+    ]
   })
     .then(burgers => {
+      console.log('burgers :', burgers);
       db.Customer.findAll({
         order: [['id', 'ASC']]
       }).then(customers => {
+        console.log('customers :', customers);
         res.render('index', {
           title: 'Burgers Page',
           burgers,
